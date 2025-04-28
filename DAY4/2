@@ -1,0 +1,29 @@
+class Solution(object):
+    def hIndex(self, citations):
+        """
+        :type citations: List[int]
+        :rtype: int
+        """
+        # Find the maximum citation count in the list
+        n = max(citations)  
+        
+        # Create a frequency array to store the number of papers with a certain citation count
+        citDict = [0] * (n + 1)
+        
+        # Populate the frequency array
+        for num in citations:
+            citDict[num] += 1  
+        
+        count = 0  # Count of papers with citations ≥ current index
+        
+        # Traverse from highest citation count to 0
+        for num in range(n, -1, -1):
+            count += citDict[num]  # Accumulate count of papers
+            if count >= num:  # If at least 'num' papers have ≥ 'num' citations
+                return num  # Return the h-index
+        
+        return 0  
+        
+
+        
+        
