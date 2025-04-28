@@ -1,0 +1,23 @@
+class Solution(object):
+    def isValid(self, s):
+        """
+        :type s: str
+        :rtype: bool
+        """
+        corr = {"(":")", "[":"]", "{":"}"}
+        stack = []
+
+        for bracket in s:
+            if bracket in corr.keys():
+                stack.append(bracket)
+            else:
+                if stack and bracket == corr[stack[-1]]:
+                    stack.pop()
+                else:
+                    return False
+
+        if stack:
+            return False
+        else:
+            return True
+                
