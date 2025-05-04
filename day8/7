@@ -1,0 +1,9 @@
+class Solution(object):
+    def twoSum(self, numbers, target):
+        l, r = 0, len(numbers) - 1
+        while True:
+            s = numbers[l] + numbers[r]
+            if s == target:
+                return [l + 1, r + 1]
+            l += s < target
+            r -= s > target
