@@ -1,0 +1,22 @@
+
+def solve(i,j,dp,dungeon,m,n):
+    if i==m-1 and j==n-1:
+        return max(1,1-dungeon[i][j])
+    if i>m-1 or j>n-1:
+        return float('inf')
+    if dp[i][j]!=-1:
+        return dp[i][j]
+    right=solve(i,j+1,dp,dungeon,m,n)
+    down=solve(i+1,j,dp,dungeon,m,n)
+    mn=min(right,down)-dungeon[i][j]
+    dp[i][j]=max(1,mn)
+    return dp[i][j]
+    
+class Solution:
+    def calculateMinimumHP(self, dungeon: List[List[int]]) -> int:
+        m=len(dungeon)
+        n=len(dungeon[0])
+        dp=[[-1]*n for _ in range(m)]
+        return solve(0,0,dp,dungeon,m,n)
+
+        
